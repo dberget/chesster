@@ -90,9 +90,17 @@
   display: none;
 }
 
+.liveview-gameboard {
+  text-align: center;
+}
+
+.fen-string {
+  padding: 2rem;
+}
+
 .game-container {
   margin: 0 auto;
-  border: blue solid 1px;
+  outline: black solid 1px;
 
   width: 392px;
   height: 392px;
@@ -116,6 +124,10 @@
   z-index: 2;
   max-width: 100%;
   background-color: transparent !important;
+}
+
+.black-perspective {
+  transform: rotate(180deg);
 }
 
 .square {

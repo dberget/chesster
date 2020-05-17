@@ -1,13 +1,10 @@
-<div><%= @fen %></div>
-<div class="liveview-gameboard"
-        data-fen="<%= @fen %>"
-  >
-    <%= if @checkmate do %>
-        <h3>checkmate!</h3>
-    <% end %>
-  <div id="game-container" class="game-container">
+<div class="liveview-gameboard" >
+  <%= if @checkmate do %>
+    <h3>checkmate!</h3>
+  <% end %>
+  <div id="game-container" class="game-container <%= @perspective %>">
     <%= for piece <- @pieces do %>
-    <img data-square="<%= piece.square %>" id="<%= piece.id %>" phx-hook="piece" src="/images/<%= piece.img %> "class="piece" />
+    <img data-square="<%= piece.square %>" id="<%= piece.id %>" phx-hook="piece" src="/images/<%= piece.img %> "class="piece <%= @perspective %>" />
 <% end %>
 <%= for col <- ["1", "2", "3", "4", "5", "6", "7", "8"] do %>
   <%= for row <- ["a", "b", "c", "d", "e", "f", "g", "h"] do %>
@@ -15,5 +12,6 @@
   <% end %>
 <% end %>
 </div>
+<div class="fen-string"><%= @fen %></div>
 </div>
 <span><%= live_redirect "Back", to: Routes.match_index_path(@socket, :index) %></span>

@@ -51,7 +51,8 @@ defmodule ChessterWeb.MatchLive.Show do
       |> assign(:pieces, @pieces)
       |> assign(:fen, fen)
       |> assign(:checkmate, false)
-      |> assign(:game_type, :player_vs_player)
+      |> assign(:perspective, "white-perspective")
+      |> assign(:game_type, :player_vs_computer)
 
     {:ok, socket}
   end
@@ -62,14 +63,14 @@ defmodule ChessterWeb.MatchLive.Show do
       {:ok, :player, :continue} ->
         pieces =
           socket.assigns.pieces
-          |> updatePosition(player_move)
+          |> update_position(player_move)
 
         {:noreply, assign(socket, :pieces, pieces)}
 
       {:ok, :player, :checkmate} ->
         pieces =
           socket.assigns.pieces
-          |> updatePosition(player_move)
+          |> update_position(player_move)
 
         socket =
           socket
@@ -81,16 +82,16 @@ defmodule ChessterWeb.MatchLive.Show do
       {:ok, :continue, computer_move} ->
         pieces =
           socket.assigns.pieces
-          |> updatePosition(player_move)
-          |> updatePosition(computer_move)
+          |> update_position(player_move)
+          |> update_position(computer_move)
 
         {:noreply, assign(socket, :pieces, pieces)}
 
       {:ok, :checkmate, computer_move} ->
         pieces =
           socket.assigns.pieces
-          |> updatePosition(player_move)
-          |> updatePosition(computer_move)
+          |> update_position(player_move)
+          |> update_position(computer_move)
 
         socket =
           socket
@@ -104,7 +105,7 @@ defmodule ChessterWeb.MatchLive.Show do
     end
   end
 
-  defp updatePosition(pieces, move) do
+  defp update_position(pieces, move) do
     {old_pos, new_pos} = String.split_at(move, 2)
 
     captured_piece = Enum.find_index(pieces, &(&1.square == new_pos))
