@@ -1,25 +1,13 @@
 <h1>Listing Matches</h1>
-
-<%= if @live_action in [:new, :edit] do %>
-  <%= live_modal @socket, ChessterWeb.MatchLive.FormComponent,
-    id: @match.id || :new,
-    title: @page_title,
-    action: @live_action,
-    match: @match,
-    return_to: Routes.match_index_path(@socket, :index) %>
-<% end %>
-
 <table>
   <thead>
     <tr>
-
       <th></th>
     </tr>
   </thead>
   <tbody id="matches">
     <%= for match <- @matches do %>
       <tr id="match-<%= match.id %>">
-
         <td>
           <span><%= live_redirect "Show", to: Routes.match_show_path(@socket, :show, match) %></span>
           <span><%= live_patch "Edit", to: Routes.match_index_path(@socket, :edit, match) %></span>
@@ -29,5 +17,4 @@
     <% end %>
   </tbody>
 </table>
-
 <span><%= live_patch "New Match", to: Routes.match_index_path(@socket, :new) %></span>

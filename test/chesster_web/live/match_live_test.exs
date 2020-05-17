@@ -32,7 +32,7 @@ defmodule ChessterWeb.MatchLiveTest do
       {:ok, index_live, _html} = live(conn, Routes.match_index_path(conn, :index))
 
       assert index_live |> element("a", "New Match") |> render_click() =~
-        "New Match"
+               "New Match"
 
       assert_patch(index_live, Routes.match_index_path(conn, :new))
 
@@ -53,7 +53,7 @@ defmodule ChessterWeb.MatchLiveTest do
       {:ok, index_live, _html} = live(conn, Routes.match_index_path(conn, :index))
 
       assert index_live |> element("#match-#{match.id} a", "Edit") |> render_click() =~
-        "Edit Match"
+               "Edit Match"
 
       assert_patch(index_live, Routes.match_index_path(conn, :edit, match))
 
@@ -91,7 +91,7 @@ defmodule ChessterWeb.MatchLiveTest do
       {:ok, show_live, _html} = live(conn, Routes.match_show_path(conn, :show, match))
 
       assert show_live |> element("a", "Edit") |> render_click() =~
-        "Edit Match"
+               "Edit Match"
 
       assert_patch(show_live, Routes.match_show_path(conn, :edit, match))
 
